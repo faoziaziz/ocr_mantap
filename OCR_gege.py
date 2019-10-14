@@ -22,14 +22,12 @@ class OCR_gege:
     config = {}
     conn = None
 
-    def __init__(self, host, username, password, port, database, refsn, data, flag):
+    def __init__(self, host, username, password, port, database):
         self.config['user']=username 
         self.config['host']=host 
         self.config['password']=password
         self.config['port']=port 
         self.confif['database']=database 
-        self.FlagImage = flag 
-        self.ImageInput = data
         self.conn = mysql.connector.connect(**self.config)
 
         self.getDataImage()
@@ -86,7 +84,7 @@ class OCR_gege:
     
         self.translated_data = '\n'.join(kataku)
         print self.translated_data
-        
+
     def getDataImage(self):
         get_image_query = "SELECT * FROM Image where Flag = 0"
         cursorget = self.conn.cursor()
@@ -144,8 +142,8 @@ try:
     port = int(sys.argv[4])
     database = sys.argv[5]
 
-    print " ok "+ username
-    
+    print " ok ["+ username+"] "
+    ocr_mulai = OCR_gege(hostname, username, password,port, database)
 
 except:
     print "yang anda masukan salah "
