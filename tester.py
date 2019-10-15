@@ -1,8 +1,8 @@
 import requests
 # If you are using a Jupyter notebook, uncomment the following line.
 # %matplotlib inline
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
+#import matplotlib.pyplot as plt
+#from matplotlib.patches import Rectangle
 from PIL import Image
 from io import BytesIO
 import os
@@ -25,10 +25,12 @@ headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 params = {'language': 'unk', 'detectOrientation': 'true'}
 
 
-image_path = "aziz.jpg"
+image_path = "filegambar.png"
 # Read the image into a byte array
 image_data = open(image_path, "rb").read()
 # Set Content-Type to octet-stream
+print "type image data"
+print type(image_data)
 headers = {'Ocp-Apim-Subscription-Key': subscription_key, 'Content-Type': 'application/octet-stream'}
 # put the byte array into your post request
 response = requests.post(ocr_url, headers=headers, params=params, data = image_data)
@@ -58,5 +60,7 @@ for limosin in limosins:
     #print kataku
     del kataku2[:]
   
-translated_data '\n'.join(kataku)
+translated_data='\n'.join(kataku)
 
+
+print translated_data

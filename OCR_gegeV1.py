@@ -19,25 +19,18 @@ class OCR_gege:
     FlagTeks = None 
     ImageInput = None
     # config for database tutorial
-    konfig = {}
-    config = {
-        'user':'root',
-        'password':'trumon1234!@#$',
-        'host':'localhost',
-        'port':3306,
-        'database':'trumon'
-        }
-    conn = mysql.connector.connect(**config)
+    config = {}
+    conn = None
     
     def __init__(self, host, username, password, port, database):
         print "init"
-        self.konfig['user']=username 
-        self.konfig['host']=host 
-        self.konfig['password']=password
-        self.konfig['port']=port 
-        self.konfig['database']=database
+        self.config['user']=username 
+        self.config['host']=host 
+        self.config['password']=password
+        self.config['port']=port 
+        self.config['database']=database
 	
-	print (self.konfig) 
+	print (self.config) 
 	try:
         	self.conn = mysql.connector.connect(**self.config)
 	except mysql.connector.Error as err:
@@ -136,8 +129,7 @@ class OCR_gege:
 
 
     def storeText(self):
-        conn2 = mysql.connector.connect(**self.config)
-        cursorinsert = conn2.cursor()
+        cursorinsert = self.conn.cursor()
         insert_query = """ INSERT INTO `Teks` (`DeviceId`, 
                         `RefSN`, 
                         `Data`
@@ -149,12 +141,12 @@ class OCR_gege:
                             )
                         )
 
-        conn2.commit()
+        self.conn.commit()
         
         cursorinsert.close()
-        conn2.close()
+
     def updateFlag(self):
-        conn3 = mysql.connector.connect(**self.config)
+        
         cursorupdate = self.conn.cursor()
         cursorupdate.execute ("""
             UPDATE Image
@@ -162,10 +154,10 @@ class OCR_gege:
             WHERE SeqNum=%s
             """, (self.FlagImage, self.RefSN))
 
-        conn3.commit()
+        self.conn.commit()
         # update to query close
         cursorupdate.close()
-        conn3.close()
+        self.conn.close()
     def __del__(self):
         # Destructor 
 	print "self destruct"
