@@ -93,12 +93,12 @@ class OCR_gege:
 
         for row in rows:
             print "Image"
-            self.RefSN = 2 # seqnum dari Image
-            self.ImageInput = 2 # data image
-            self.DeviceId = 3 #device id
+            self.RefSN = row[0] # seqnum dari Image
+            self.ImageInput =  row[3]# data image
+            self.DeviceId = row[2] #device id
             self.TranslateData()
-            #self.storeText()
-            #self.updateFlag()
+            self.storeText()
+            self.updateFlag()
         # closing cursor
         cursorget.close()
     def storeText(self):
