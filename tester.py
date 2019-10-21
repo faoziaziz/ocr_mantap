@@ -50,15 +50,15 @@ limosins = line_infos[0]
 kataku =[]
 kataku2 =[]
 i = 0
-for limosin in limosins:
-    
-    for word_lines in limosin["words"]:
-        kataku2.append(word_lines["text"]) 
-    kilimanjaro = ' '.join(kataku2) 
-    kataku.append(kilimanjaro)
-    #print "silit"
-    #print kataku
-    del kataku2[:]
+for region in analysis["regions"]:
+    for limosin in region["lines"]:
+        for word_lines in limosin["words"]:
+            kataku2.append(word_lines["text"]) 
+        kilimanjaro = ' '.join(kataku2) 
+        kataku.append(kilimanjaro)
+        #print "silit"
+        #print kataku
+        del kataku2[:]
   
 translated_data='\n'.join(kataku)
 
