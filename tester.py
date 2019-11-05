@@ -56,8 +56,6 @@ for region in analysis["regions"]:
             kataku2.append(word_lines["text"]) 
         kilimanjaro = ' '.join(kataku2) 
         kataku.append(kilimanjaro)
-        #print "silit"
-        #print kataku
         del kataku2[:]
   
 translated_data='\n'.join(kataku)
